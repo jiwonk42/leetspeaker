@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Leetspeaker
 {
@@ -24,7 +25,42 @@ namespace Leetspeaker
         }
       }
       string result = string.Join("", array);
-      return result;
+
+      string[] newArray = result.Split(' ');
+
+      List<string> resultList = new List<string>{};
+      foreach (string word in newArray)
+      {
+        char[] wordArray = word.ToCharArray();
+        if (Regex.IsMatch(word, @"^\W"))
+        {
+          // When wordArray[0] is a punctuation
+          // When wordArray[1] is a character 's'
+          for (int i = 2; i < wordArray.Length; i++)
+          {
+            if (wordArray[i] == 's')
+            {
+              wordArray[i] = 'z';
+            }
+          }
+        }
+        else
+        {
+          // When wordArray[0] is NOT a punctuation
+          // Skipping the first character 's'
+          for (int i = 1; i < wordArray.Length; i++)
+          {
+            if (wordArray[i] == 's')
+            {
+              wordArray[i] = 'z';
+            }
+          }
+        }
+         resultList.Add(string.Join("", wordArray));
+      }
+      newArray = resultList.ToArray();
+      string finalResult = string.Join(" ", newArray);
+      return finalResult;
     }
   }
 }

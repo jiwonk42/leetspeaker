@@ -33,5 +33,12 @@ namespace Leetspeaker
       LeetspeakerTranslator testLeetspeaker = new LeetspeakerTranslator();
       Assert.Equal("1'm L30", testLeetspeaker.Translate("I'm Leo"));
     }
+
+    [Fact]
+    public void LeetspeakerTranslator_ForUserInputs_z()
+    {
+      LeetspeakerTranslator testLeetspeaker = new LeetspeakerTranslator();
+      Assert.Equal("1t'z L30 'Start hip'zz aza", testLeetspeaker.Translate("It's Leo 'Start hip'ss asa"));
+    }
   }
 }
